@@ -21,10 +21,9 @@ const MONTHS = [
   "November",
   "December",
 ];
-const API_KEY = "ce144f0cf51fa43f03431f0488a36728";
+const API_KEY = "b077oeftf49ab36d6631b0f3e4ab4d9a";
 
-let geoUrl = "",
-  weatherUrl = "";
+let weatherUrl = "";
 
 let now = new Date();
 let form = document.querySelector("#search-form");
@@ -37,10 +36,6 @@ celciusLink.addEventListener("click", showCelcius);
 fahrenheitLink.addEventListener("click", showFahrenheit);
 currentButton.addEventListener("click", getCurrentData);
 
-changeDateData(now);
-changeTime();
-getCurrentData();
-
 function onSearch(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
@@ -48,8 +43,9 @@ function onSearch(event) {
   city = format(city);
 
   if (city) {
-    geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
-    processGeoData(geoUrl);
+    weatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${API_KEY}&units=metric`;
+    axios.get(weatherUrl).then(logTemp);
+    axios.get(weatherUrl).then(logCity);
   }
 }
 
@@ -60,38 +56,23 @@ function getCurrentData() {
 function handlePosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+  weatherUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${API_KEY}`;
   axios.get(weatherUrl).then(logTemp);
-  let reverseGeoUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
-  axios.get(reverseGeoUrl).then(logCity);
-}
-
-function processGeoData(geoUrl) {
-  axios.get(geoUrl).then(logCity);
-  axios.get(geoUrl).then(getGeo);
-}
-function getGeo(response) {
-  let lat = response.data[0].lat;
-  let lon = response.data[0].lon;
-  showWeather(lat, lon);
-}
-
-function showWeather(lat, lon) {
-  weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-  axios.get(weatherUrl).then(logTemp);
+  axios.get(weatherUrl).then(logCity);
 }
 
 function logCity(response) {
+  console.log(response);
   let cityHeading = document.querySelector("h1");
   let countryHeading = document.querySelector("h2");
-  changeElementInnerHtml(cityHeading, response.data[0].name);
-  changeElementInnerHtml(countryHeading, response.data[0].country);
+  changeElementInnerHtml(cityHeading, response.data.city);
+  changeElementInnerHtml(countryHeading, response.data.country);
 }
 
 function logTemp(response) {
+  console.log(response);
   let currentTemperature = document.getElementById("current-temp");
-  let temperature = `${Math.round(response.data.main.temp)}°C`;
+  let temperature = `${Math.round(response.data.temperature.current)}°C`;
   changeElementInnerHtml(currentTemperature, temperature);
 }
 
@@ -170,3 +151,7 @@ function convertToFahrenheit(celcius) {
 function convertToCelcius(fahr) {
   return (fahr - 32) / (9 / 5);
 }
+
+changeDateData(now);
+changeTime();
+getCurrentData();
