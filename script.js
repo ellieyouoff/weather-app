@@ -44,8 +44,7 @@ function onSearch(event) {
 
   if (city) {
     weatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${API_KEY}&units=metric`;
-    axios.get(weatherUrl).then(logTemp);
-    axios.get(weatherUrl).then(logCity);
+    axios.get(weatherUrl).then(logData);
   }
 }
 
@@ -57,23 +56,56 @@ function handlePosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   weatherUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${API_KEY}`;
-  axios.get(weatherUrl).then(logTemp);
-  axios.get(weatherUrl).then(logCity);
+  axios.get(weatherUrl).then(logData);
 }
 
-function logCity(response) {
-  console.log(response);
+function logData(response) {
+  let currentTemperature = document.getElementById("current-temp");
   let cityHeading = document.querySelector("h1");
   let countryHeading = document.querySelector("h2");
+  let humidity = document.getElementById("humidity");
+  let wind = document.getElementById("wind");
+
+  let icon = document.getElementById("current-weather-icon");
+  let temperature = `${Math.round(response.data.temperature.current)}°C`;
   changeElementInnerHtml(cityHeading, response.data.city);
   changeElementInnerHtml(countryHeading, response.data.country);
+  changeElementInnerHtml(currentTemperature, temperature);
+  changeElementInnerHtml(humidity, response.data.temperature.humidity);
+  changeElementInnerHtml(wind, response.data.wind.speed);
+
+  icon.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+
+  let wUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=S4J8L7B44L2Z&format=json&by=position&lat=${response.data.coordinates.latitude}&lng=${response.data.coordinates.longitude}`;
+  axios.get(wUrl).then(logTime);
+
+  let fUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${response.data.coordinates.latitude}&lon=${response.data.coordinates.longitude}&key=${API_KEY}&units=metric`;
+  axios.get(fUrl).then(logForecast);
 }
 
-function logTemp(response) {
+function logForecast(response) {
   console.log(response);
-  let currentTemperature = document.getElementById("current-temp");
-  let temperature = `${Math.round(response.data.temperature.current)}°C`;
-  changeElementInnerHtml(currentTemperature, temperature);
+  let minTemp = document.getElementById("min-temp");
+  let maxTemp = document.getElementById("max-temp");
+  let minRounded = Math.round(response.data.daily[0].temperature.minimum);
+  let maxRounded = Math.round(response.data.daily[0].temperature.maximum);
+  console.log(response.data.daily[0]);
+  changeElementInnerHtml(minTemp, minRounded);
+  changeElementInnerHtml(maxTemp, maxRounded);
+}
+
+function logTime(response) {
+  let currentTime = document.querySelector(".time");
+  let date = response.data.formatted;
+  let hours = date.slice(11, 13);
+  let minutes = date.slice(14, 16);
+
+  let time = `${hours}:${minutes}`;
+
+  changeElementInnerHtml(currentTime, time);
 }
 
 function changeElementInnerHtml(el, content) {
@@ -118,14 +150,6 @@ function changeDateData(target_date) {
   changeElementInnerHtml(selectedDate, dateString);
 }
 
-function changeTime() {
-  let currentTime = document.querySelector(".time");
-  let hours = (now.getHours() < 10 ? "0" : "") + now.getHours();
-  let minutes = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
-  let time = `${hours}:${minutes}`;
-  changeElementInnerHtml(currentTime, time);
-}
-
 //format text, convert to Fahrenheit, showAlert functions
 function format(city) {
   let words = city.split(" ");
@@ -153,5 +177,5 @@ function convertToCelcius(fahr) {
 }
 
 changeDateData(now);
-changeTime();
+// changeTime();
 getCurrentData();
