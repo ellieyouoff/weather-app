@@ -58,6 +58,10 @@ li {
   justify-content: space-between;
 }
 
+#weather-description {
+  color: #848fa5;
+}
+
 .location h1 {
   color: #fefefe;
   font-size: 5vh;
@@ -80,7 +84,7 @@ li {
 
 .links {
   width: 120px;
-  margin: 0 0 20px;
+  margin: 20px 0;
 }
 
 .temp-link {
@@ -252,6 +256,10 @@ footer {
 
   .units {
     font-size: 16px;
+  }
+
+  .links {
+    margin: 0 auto;
   }
 
   .value {

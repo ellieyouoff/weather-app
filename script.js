@@ -65,6 +65,7 @@ function handlePosition(position) {
 
 function logData(response) {
   let currentTemperature = document.getElementById("current-temp");
+  let weatherDescription = document.getElementById("weather-description");
   let cityHeading = document.querySelector("h1");
   let countryHeading = document.querySelector("h2");
   let humidity = document.getElementById("humidity");
@@ -77,6 +78,10 @@ function logData(response) {
   changeElementInnerHtml(currentTemperature, temperature);
   changeElementInnerHtml(humidity, response.data.temperature.humidity);
   changeElementInnerHtml(wind, response.data.wind.speed);
+  changeElementInnerHtml(
+    weatherDescription,
+    response.data.condition.description
+  );
 
   icon.setAttribute(
     "src",
