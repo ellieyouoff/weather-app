@@ -18,6 +18,7 @@ ul {
 li {
   margin-bottom: 25px;
   list-style: none;
+  width: 60%;
 }
 
 .search {
@@ -85,12 +86,17 @@ li {
   padding: 5px;
 }
 
+#to-celcius {
+  color: #0c66b4;
+}
+
 .temp-link:hover {
   color: #fefefe;
 }
 
 .temp-divider {
   color: #69b5f8;
+  border-radius: 10px;
 }
 
 .time {
@@ -128,11 +134,11 @@ li {
 
 .par {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .units {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 300;
   color: #69b5f8;
 }
@@ -160,6 +166,23 @@ li {
 .schedule-card {
   padding: 0 20px 20px 0;
   margin: 0 auto;
+  min-width: 40px;
+}
+
+.forecast-temp {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.min-daily,
+.max-daily {
+  color: #69b5f8;
+  font-size: 16px;
+}
+
+.min-daily {
+  color: #768c9f;
+  font-size: 13px;
 }
 
 .day {
@@ -175,6 +198,7 @@ li {
   width: 2px;
   background-color: #69b5f8;
   margin: 0 10px;
+  border-radius: 10px;
 }
 
 .list-item-content {

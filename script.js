@@ -28,8 +28,14 @@ let weatherUrl = "";
 let now = new Date();
 let form = document.querySelector("#search-form");
 let currentButton = document.getElementById("current-button");
+let search = document.querySelector(".search");
 let celciusLink = document.querySelector("#to-celcius");
 let fahrenheitLink = document.querySelector("#to-fahrenheit");
+document.addEventListener("click", (e) => {
+  if (e.target.nodeName === "BODY") {
+    search.classList.remove("active");
+  }
+});
 
 form.addEventListener("submit", onSearch);
 celciusLink.addEventListener("click", () => {
@@ -45,6 +51,7 @@ function onSearch(event) {
   let searchInput = document.querySelector("#search-input");
   let city = searchInput.value.trim();
   city = format(city);
+  form.reset();
 
   if (city) {
     weatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${API_KEY}&units=metric`;
@@ -94,15 +101,94 @@ function logData(response) {
 }
 
 function logForecast(response) {
-  console.log(response);
+  let forecastElement = document.querySelector(".schedule");
+  let forecast = [];
+  let forecastHtml = ``;
+
+  let dayIndex = new Date(
+    response.data.daily[0].time * 1000 + 4200 * 1000 + 432000 * 1000
+  ).getDay();
+
+  let dayStr;
+
+  for (dayIndex; dayIndex > 0; dayIndex--) {
+    dayStr = DAYS[dayIndex];
+    forecast.unshift(`
+   <li
+            class="schedule-card rounded d-flex flex-column align-items-center p-2"
+          >
+            <div class="list-item-content">
+              <div class="day">${dayStr.slice(0, 3)}</div>
+              <img
+                class="weather-icon"
+                src="./icons/${
+                  response.data.daily[dayIndex].condition.icon
+                }.svg"
+                alt="forecast weather"
+              />
+              <div class="forecast-temp">
+                <span class="max-daily daily-units">${Math.round(
+                  response.data.daily[dayIndex].temperature.maximum
+                )}°C</span>
+                <span class="min-daily daily-units">${Math.round(
+                  response.data.daily[dayIndex].temperature.minimum
+                )}°C</span>
+              </div>
+            </div>
+          </li>
+          `);
+    if (dayIndex !== 1) {
+      forecast.unshift(`
+            <div class="divider"></div>`);
+    }
+  }
+
+  for (let i = 0; i < forecast.length; i++) {
+    forecastHtml += forecast[i];
+  }
+
+  forecastElement.innerHTML = forecastHtml;
+
   let minTemp = document.getElementById("min-temp");
   let maxTemp = document.getElementById("max-temp");
   let minRounded = Math.round(response.data.daily[0].temperature.minimum);
   let maxRounded = Math.round(response.data.daily[0].temperature.maximum);
-  console.log(response.data.daily[0]);
   changeElementInnerHtml(minTemp, minRounded);
   changeElementInnerHtml(maxTemp, maxRounded);
 }
+
+// function displayForecastHtml() {
+//   let forecastElement = document.querySelector(".schedule");
+
+//   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+
+//   let forecastHtml = ``;
+
+//   days.forEach((day) => {
+//     forecastHtml += `
+//    <li
+//             class="schedule-card rounded d-flex flex-column align-items-center p-2"
+//           >
+//             <div class="list-item-content">
+//               <div class="day">${day}</div>
+//               <img
+//                 class="weather-icon"
+//                 src="./icons/clear-sky-day.svg"
+//                 alt="forecast weather"
+//               />
+//               <div class="forecast-temp">
+//                 <span class="max-daily">18°C</span>
+//                 <span class="min-daily">12°C</span>
+//               </div>
+//             </div>
+//           </li>
+//           <div class="divider"></div>`;
+//   });
+
+//   forecastElement.innerHTML = forecastHtml;
+// }
+
+// displayForecastHtml();
 
 function logTime(response) {
   let currentTime = document.querySelector(".time");
@@ -141,6 +227,9 @@ function showUnits(units) {
   let minUnit = document.getElementById("min-unit");
   let maxUnit = document.getElementById("max-unit");
   let currentContent = currentTemperature.innerHTML;
+  let dailyUnits = document.querySelectorAll(".daily-units");
+  let fahrLink = document.getElementById("to-fahrenheit");
+  let celLink = document.getElementById("to-celcius");
 
   let unit = currentContent.charAt(currentContent.length - 1);
   let value = currentContent.slice(0, -2);
@@ -161,6 +250,13 @@ function showUnits(units) {
     changeElementInnerHtml(maxUnit, `°C`);
     changeElementInnerHtml(windUnit, `km/h`);
     changeElementInnerHtml(wind, convertToKmh(wind.innerHTML).toFixed(2));
+    dailyUnits.forEach((el) => {
+      let num = el.innerHTML.substring(0, el.innerHTML.length - 2);
+
+      changeElementInnerHtml(el, `${convertToCelcius(num).toFixed(0)}°C`);
+    });
+    celLink.style.color = "#0c66b4";
+    fahrLink.style.color = "#69b5f8";
   } else if (unit !== "F" && units === "imperial") {
     changeElementInnerHtml(
       currentTemperature,
@@ -178,6 +274,13 @@ function showUnits(units) {
     changeElementInnerHtml(maxUnit, `°F`);
     changeElementInnerHtml(windUnit, `mph`);
     changeElementInnerHtml(wind, convertToMph(wind.innerHTML).toFixed(2));
+    dailyUnits.forEach((el) => {
+      let num = el.innerHTML.substring(0, el.innerHTML.length - 2);
+
+      changeElementInnerHtml(el, `${convertToFahrenheit(num).toFixed(0)}°F`);
+    });
+    celLink.style.color = "#69b5f8";
+    fahrLink.style.color = "#0c66b4";
   }
 }
 
