@@ -49,6 +49,11 @@
             id="current-button"
           />
         </form>
+        <div class="links d-flex flex-row align-items-center mt-2 mb-3">
+          <a class="temp-link" href="#" id="to-celcius">°C</a>
+          <span class="temp-divider">|</span>
+          <a class="temp-link" href="#" id="to-fahrenheit">°F</a>
+        </div>
 
         <div class="today-data d-flex flex-column">
           <div class="row mt-4 current pb-2 d-flex flex-row align-items-center">
@@ -59,22 +64,17 @@
               <p class="time m-1">--:--</p>
             </div>
             <div class="col-md-4 col-sm-12 current-weather">
-              <div
-                class="links d-flex flex-row align-items-center justify-content-center mt-4"
-              >
-                <a class="temp-link" href="#" id="to-celcius">°C</a>
-                <span class="temp-divider">|</span>
-                <a class="temp-link" href="#" id="to-fahrenheit">°F</a>
+              <div class="current-temp-block pt-2">
+                <img
+                  src="./icons/clear-sky-day.svg"
+                  alt="current weather icon"
+                  id="current-weather-icon"
+                />
+                <p class="current-temp m-0" id="current-temp">--°C</p>
               </div>
-              <img
-                src="./icons/clear-sky-day.svg"
-                alt="current weather icon"
-                id="current-weather-icon"
-              />
-              <p class="current-temp m-0" id="current-temp">--°C</p>
             </div>
           </div>
-          <div class="row mt-2 p-3 rounded today-data-card pb-4 ms-0">
+          <div class="row mt-2 p-3 rounded today-data-card pb-4">
             <div>
               <span class="pb-4 today-day" id="today-day">-------, </span
               ><span class="today-date" id="today-date">-- --, ----</span>

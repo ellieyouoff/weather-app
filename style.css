@@ -46,14 +46,17 @@ li {
 
 .current {
   display: flex;
+  width: 90%;
+  margin: 0 auto;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #weather-description {
   color: #848fa5;
   font-size: 16px;
+  padding-left: 2px;
 }
 
 .location h1 {
@@ -61,6 +64,7 @@ li {
   font-size: 4vh;
   font-weight: 800;
   margin: 0;
+  padding-left: 1px;
 }
 
 .location h2 {
@@ -107,20 +111,20 @@ li {
 }
 
 .current-weather .current-temp {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 800;
   color: #fefefe;
-  margin: 0;
   text-align: center;
 }
 
 #current-weather-icon {
   width: 120px;
-  margin-top: -10px;
+  margin-right: -20px;
 }
 
 .today-data-card {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   background-color: #fefefe;
   box-shadow: 0 2px 10px rgba(100, 98, 124, 0.4);
 }
@@ -257,6 +261,10 @@ footer {
     margin-bottom: 30px;
   }
 
+  .current-temp-block {
+    margin: 0 auto;
+  }
+
   #current-weather-icon {
     margin: 0 auto;
   }
@@ -287,6 +295,8 @@ footer {
 
   .links {
     margin: 0 auto;
+    padding-left: 5px;
+    padding-top: 30px;
   }
 
   .value {
