@@ -43,11 +43,6 @@ li {
   margin: 0 10px;
 }
 
-#search-button:hover,
-#current-button:hover {
-  background-color: rgba(250, 157, 66, 0.2);
-}
-
 .current {
   display: flex;
   flex-direction: row;
@@ -188,8 +183,10 @@ li {
 }
 
 .search:hover,
-.search:focus {
-  background-color: rgba(250, 157, 66, 0.3);
+.search:focus,
+#search-button:hover,
+#current-button:hover {
+  background-color: #bccfe0;
 }
 
 footer {
