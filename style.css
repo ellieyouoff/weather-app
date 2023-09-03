@@ -78,12 +78,13 @@ li {
 
 .links {
   width: 120px;
+  text-align: center;
 }
 
 .temp-link {
   font-size: 24px;
   color: #69b5f8;
-  padding: 5px;
+  padding: 10px;
 }
 
 #to-celcius {
@@ -110,10 +111,12 @@ li {
   font-weight: 800;
   color: #fefefe;
   margin: 0;
+  text-align: center;
 }
 
 #current-weather-icon {
   width: 120px;
+  margin-top: -10px;
 }
 
 .today-data-card {
