@@ -82,11 +82,9 @@ function logData(response) {
     weatherDescription,
     response.data.condition.description
   );
+  console.log(response.data.condition.icon);
 
-  icon.setAttribute(
-    "src",
-    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
-  );
+  icon.setAttribute("src", `./icons/${response.data.condition.icon}.svg`);
 
   let wUrl = `https://api.timezonedb.com/v2.1/get-time-zone?key=S4J8L7B44L2Z&format=json&by=position&lat=${response.data.coordinates.latitude}&lng=${response.data.coordinates.longitude}`;
   axios.get(wUrl).then(logTime);

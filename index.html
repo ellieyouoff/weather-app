@@ -26,176 +26,166 @@
   </head>
   <body>
     <div class="container p-5 rounded">
-      <div class="row">
-        <div class="col-lg-8 col-sm-12 mt-4">
-          <form action="submit" id="search-form" class="row">
-            <input
-              type="search"
-              class="search rounded col-lg-6 col-md-6 col-sm-12"
-              placeholder="🔎  Search city..."
-              aria-label="Search"
-              aria-describedby="search-addon"
-              id="search-input"
-            />
-            <input
-              type="submit"
-              value="Search"
-              class="col rounded"
-              id="search-button"
-            />
-            <input
-              type="submit"
-              value="Current"
-              class="col rounded"
-              id="current-button"
-            />
-          </form>
+      <div class="col-12">
+        <form action="submit" id="search-form" class="row">
+          <input
+            type="search"
+            class="search rounded col-lg-6 col-md-6 col-sm-12"
+            placeholder="🔎  Search city..."
+            aria-label="Search"
+            aria-describedby="search-addon"
+            id="search-input"
+          />
+          <input
+            type="submit"
+            value="Search"
+            class="col rounded"
+            id="search-button"
+          />
+          <input
+            type="submit"
+            value="Current"
+            class="col rounded"
+            id="current-button"
+          />
+        </form>
 
-          <div
-            class="today-data d-flex flex-column justify-content-between pt-3"
-          >
-            <div class="row mt-4 current p-4 pb-0 ps-1">
-              <div class="col-md-8 col-sm-12 location">
-                <span id="weather-description">weather is...</span>
-                <h1>--</h1>
-                <h2>--</h2>
-                <p class="time m-1">--:--</p>
-              </div>
-              <div class="col-md-4 col-sm-12 current-weather">
-                <div
-                  class="links d-flex flex-row align-items-center justify-content-center mt-4"
-                >
-                  <a class="temp-link" href="#" id="to-celcius">°C</a>
-                  <span class="temp-divider">|</span>
-                  <a class="temp-link" href="#" id="to-fahrenheit">°F</a>
-                </div>
-                <img
-                  src="./icons/clear-sky-day.png"
-                  alt="current weather icon"
-                  id="current-weather-icon"
-                />
-                <p class="current-temp m-0" id="current-temp">--°C</p>
-              </div>
+        <div class="today-data d-flex flex-column justify-content-between">
+          <div class="row mt-4 current p-4 pb-0 ps-1">
+            <div class="col-md-8 col-sm-12 location">
+              <span id="weather-description">weather is...</span>
+              <h1>--</h1>
+              <h2>--</h2>
+              <p class="time m-1">--:--</p>
             </div>
-            <div class="row mt-4 me-1 p-3 rounded today-data-card pb-5 ms-0">
-              <div>
-                <span class="pb-4 today-day" id="today-day">Tuesday, </span
-                ><span class="today-date" id="today-date">August 29, 2023</span>
+            <div class="col-md-4 col-sm-12 current-weather">
+              <div
+                class="links d-flex flex-row align-items-center justify-content-center mt-4"
+              >
+                <a class="temp-link" href="#" id="to-celcius">°C</a>
+                <span class="temp-divider">|</span>
+                <a class="temp-link" href="#" id="to-fahrenheit">°F</a>
               </div>
+              <img
+                src="./icons/clear-sky-day.svg"
+                alt="current weather icon"
+                id="current-weather-icon"
+              />
+              <p class="current-temp m-0" id="current-temp">--°C</p>
+            </div>
+          </div>
+          <div class="row mt-2 p-3 rounded today-data-card pb-4 ms-0">
+            <div>
+              <span class="pb-4 today-day" id="today-day">Tuesday, </span
+              ><span class="today-date" id="today-date">August 29, 2023</span>
+            </div>
 
-              <div class="col-lg-3 col-sm-6 par">
-                <div class="units">%</div>
-                <div class="value" id="humidity">--</div>
-                <div class="parameter">Humidity</div>
-              </div>
-              <div class="col-lg-3 col-sm-6 par">
-                <div class="units" id="wind-unit">km/h</div>
-                <div class="value" id="wind">--</div>
-                <div class="parameter">Wind</div>
-              </div>
-              <div class="col-lg-3 col-sm-6 par">
-                <div class="units" id="min-unit">°C</div>
-                <div class="value" id="min-temp">--</div>
-                <div class="parameter">Min</div>
-              </div>
-              <div class="col-lg-3 col-sm-6 par">
-                <div class="units" id="max-unit">°C</div>
-                <div class="value" id="max-temp">--</div>
-                <div class="parameter">Max</div>
-              </div>
+            <div class="col-lg-3 col-sm-6 par">
+              <div class="units">%</div>
+              <div class="value" id="humidity">--</div>
+              <div class="parameter">Humidity</div>
+            </div>
+            <div class="col-lg-3 col-sm-6 par">
+              <div class="units" id="wind-unit">km/h</div>
+              <div class="value" id="wind">--</div>
+              <div class="parameter">Wind</div>
+            </div>
+            <div class="col-lg-3 col-sm-6 par">
+              <div class="units" id="min-unit">°C</div>
+              <div class="value" id="min-temp">--</div>
+              <div class="parameter">Min</div>
+            </div>
+            <div class="col-lg-3 col-sm-6 par">
+              <div class="units" id="max-unit">°C</div>
+              <div class="value" id="max-temp">--</div>
+              <div class="parameter">Max</div>
             </div>
           </div>
         </div>
-
-        <div class="col-lg-4 col-sm-12 mb-2 mt-4">
-          <ul
-            class="schedule d-flex flex-column align-items-center justify-content-between"
-          >
-            <li
-              class="schedule-card rounded d-flex flex-row align-items-center p-2"
-            >
-              <div class="col-4">
-                <img
-                  class="weather-icon p-4"
-                  src="./icons/clear-sky-day.png"
-                  alt="tomorrow weather"
-                />
-              </div>
-              <div class="col-8 mb-2">
-                <div class="day">Tomorrow</div>
-                <div class="date">August 30, 2023</div>
-              </div>
-            </li>
-            <li
-              class="schedule-card rounded d-flex flex-row align-items-center p-2"
-            >
-              <div class="col-4">
-                <img
-                  class="weather-icon p-4"
-                  src="./icons/clear-sky-day.png"
-                  alt="tomorrow weather"
-                />
-              </div>
-              <div class="col-8">
-                <div class="day">Thursday</div>
-                <div class="date">August 31, 2023</div>
-              </div>
-            </li>
-            <li
-              class="schedule-card rounded d-flex flex-row align-items-center p-2"
-            >
-              <div class="col-4">
-                <img
-                  class="weather-icon p-4"
-                  src="./icons/clear-sky-day.png"
-                  alt="tomorrow weather"
-                />
-              </div>
-              <div class="col-8">
-                <div class="day">Friday</div>
-                <div class="date">September 1, 2023</div>
-              </div>
-            </li>
-            <li
-              class="schedule-card rounded d-flex flex-row align-items-center p-2"
-            >
-              <div class="col-4">
-                <img
-                  class="weather-icon p-4"
-                  src="./icons/clear-sky-day.png"
-                  alt="tomorrow weather"
-                />
-              </div>
-              <div class="col-8">
-                <div class="day">Saturday</div>
-                <div class="date">September 2, 2023</div>
-              </div>
-            </li>
-            <li
-              class="schedule-card rounded d-flex flex-row align-items-center p-2"
-            >
-              <div class="col-4">
-                <img
-                  class="weather-icon p-4"
-                  src="./icons/clear-sky-day.png"
-                  alt="tomorrow weather"
-                />
-              </div>
-              <div class="col-8">
-                <div class="day">Sunday</div>
-                <div class="date">September 3, 2023</div>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
+
+      <div class="mt-4 row d-flex flex-row justify-content-between">
+        <ul
+          class="schedule d-flex flex-row justify-content-center align-items-center"
+        >
+          <li
+            class="schedule-card rounded d-flex flex-column align-items-center p-2"
+          >
+            <div class="list-item-content">
+              <div class="day">Sun</div>
+              <img
+                class="weather-icon"
+                src="./icons/clear-sky-day.svg"
+                alt="forecast weather"
+              />
+            </div>
+          </li>
+          <div class="divider"></div>
+          <li
+            class="schedule-card rounded d-flex flex-column align-items-center p-2"
+          >
+            <div class="list-item-content">
+              <div class="day">Sun</div>
+              <img
+                class="weather-icon"
+                src="./icons/clear-sky-day.svg"
+                alt="forecast weather"
+              />
+            </div>
+          </li>
+          <div class="divider"></div>
+          <li
+            class="schedule-card rounded d-flex flex-column align-items-center p-2"
+          >
+            <div class="list-item-content">
+              <div class="day">Sun</div>
+              <img
+                class="weather-icon"
+                src="./icons/clear-sky-day.svg"
+                alt="forecast weather"
+              />
+            </div>
+          </li>
+          <div class="divider"></div>
+          <li
+            class="schedule-card rounded d-flex flex-column align-items-center p-2"
+          >
+            <div class="list-item-content">
+              <div class="day">Sun</div>
+              <img
+                class="weather-icon"
+                src="./icons/clear-sky-day.svg"
+                alt="forecast weather"
+              />
+            </div>
+          </li>
+          <div class="divider"></div>
+          <li
+            class="schedule-card rounded d-flex flex-column align-items-center p-2"
+          >
+            <div class="list-item-content">
+              <div class="day">Sun</div>
+              <img
+                class="weather-icon"
+                src="./icons/clear-sky-day.svg"
+                alt="forecast weather"
+              />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <footer>
+        <span class="footer-message"
+          >Project on
+          <a href="https://github.com/ellieyouoff/weather-app">GitHub</a></span
+        ><br />
+        <span class="footer-message"
+          >Icons from
+          <a href="https://bas.dev/work/meteocons">Meteocons</a></span
+        >
+      </footer>
     </div>
-    <footer>
-      <span class="footer-message"
-        >Project on
-        <a href="https://github.com/ellieyouoff/weather-app">GitHub</a></span
-      >
-    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
