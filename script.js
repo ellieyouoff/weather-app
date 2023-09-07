@@ -104,16 +104,19 @@ function logForecast(response) {
   let forecastElement = document.querySelector(".schedule");
   let forecast = [];
   let forecastHtml = ``;
+  console.log(response.data);
 
-  let dayIndex = new Date(
-    response.data.daily[0].time * 1000 + 4200 * 1000 + 432000 * 1000
-  ).getDay();
+  let dayIndex = new Date(response.data.daily[0].time * 1000).getDay();
 
   let dayStr;
 
-  for (dayIndex; dayIndex > 0; dayIndex--) {
+  dayIndex += 1;
+
+  for (let i = 0; i < 5; i++) {
     dayStr = DAYS[dayIndex];
-    forecast.unshift(`
+    console.log(dayStr);
+
+    forecast.push(`
    <li
             class="schedule-card rounded d-flex flex-column align-items-center p-2"
           >
@@ -137,8 +140,13 @@ function logForecast(response) {
             </div>
           </li>
           `);
-    if (dayIndex !== 1) {
-      forecast.unshift(`
+    if (dayIndex === 6) {
+      dayIndex = 0;
+    } else {
+      dayIndex++;
+    }
+    if (i !== 4) {
+      forecast.push(`
             <div class="divider"></div>`);
     }
   }
