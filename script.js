@@ -124,17 +124,15 @@ function logForecast(response) {
               <div class="day">${dayStr.slice(0, 3)}</div>
               <img
                 class="weather-icon"
-                src="./icons/${
-                  response.data.daily[dayIndex].condition.icon
-                }.svg"
+                src="./icons/${response.data.daily[i].condition.icon}.svg"
                 alt="forecast weather"
               />
               <div class="forecast-temp">
                 <span class="max-daily daily-units">${Math.round(
-                  response.data.daily[dayIndex].temperature.maximum
+                  response.data.daily[i].temperature.maximum
                 )}°C</span>
                 <span class="min-daily daily-units">${Math.round(
-                  response.data.daily[dayIndex].temperature.minimum
+                  response.data.daily[i].temperature.minimum
                 )}°C</span>
               </div>
             </div>
